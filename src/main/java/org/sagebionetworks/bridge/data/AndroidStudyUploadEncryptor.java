@@ -1,4 +1,4 @@
-package org.sagebionetworks.bridge.dataUploadUtils;
+package org.sagebionetworks.bridge.data;
 
 import static com.google.common.base.Preconditions.checkState;
 
@@ -23,8 +23,8 @@ import org.spongycastle.operator.OutputEncryptor;
 /**
  * Encrypts data using a Study's public key, so Bridge can decrypt it after upload.
  */
-public class StudyUploadEncryptorSC implements StudyUploadEncryptor {
-    private static final Logger LOG = LoggerFactory.getLogger(StudyUploadEncryptorSC.class);
+public class AndroidStudyUploadEncryptor {
+    private static final Logger LOG = LoggerFactory.getLogger(AndroidStudyUploadEncryptor.class);
 
     private static final String JCE_PROVIDER = "SC"; // SpongyCastle
 
@@ -35,7 +35,7 @@ public class StudyUploadEncryptorSC implements StudyUploadEncryptor {
         Security.insertProviderAt(new BouncyCastleProvider(), 1);
     }
 
-    public StudyUploadEncryptorSC(X509Certificate publicKey) {
+    public AndroidStudyUploadEncryptor(X509Certificate publicKey) {
         this.recipientInfoGeneratorSupplier = Suppliers.memoize(() -> {
             try {
                 return new JceKeyTransRecipientInfoGenerator(publicKey).setProvider(JCE_PROVIDER);

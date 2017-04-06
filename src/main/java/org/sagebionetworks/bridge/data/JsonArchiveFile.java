@@ -1,4 +1,4 @@
-package org.sagebionetworks.bridge.dataUploadUtils;
+package org.sagebionetworks.bridge.data;
 
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;

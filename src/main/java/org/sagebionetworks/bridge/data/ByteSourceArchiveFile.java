@@ -1,4 +1,4 @@
-package org.sagebionetworks.bridge.dataUploadUtils;
+package org.sagebionetworks.bridge.data;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

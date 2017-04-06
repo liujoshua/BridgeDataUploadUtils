@@ -1,4 +1,4 @@
-package org.sagebionetworks.bridge.dataUploadUtils;
+package org.sagebionetworks.bridge.data;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;

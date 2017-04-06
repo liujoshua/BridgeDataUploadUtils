@@ -1,4 +1,4 @@
-package org.sagebionetworks.bridge.dataUploadUtils;
+package org.sagebionetworks.bridge.data;
 
 
 import static com.google.common.base.Preconditions.checkState;
@@ -32,8 +32,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Encrypt data using a Study's public key under Bouncy Castle.
  */
-public class StudyUploadEncryptorBC implements StudyUploadEncryptor {
-    private static final Logger LOG = LoggerFactory.getLogger(StudyUploadEncryptorBC.class);
+public class StudyUploadEncryptor {
+    private static final Logger LOG = LoggerFactory.getLogger(StudyUploadEncryptor.class);
 
     private static final String JCE_PROVIDER = "BC"; // BouncyCastle
 
@@ -44,7 +44,7 @@ public class StudyUploadEncryptorBC implements StudyUploadEncryptor {
         Security.insertProviderAt(new BouncyCastleProvider(), 1);
     }
 
-    public StudyUploadEncryptorBC(X509Certificate publicKey) {
+    public StudyUploadEncryptor(X509Certificate publicKey) {
         this.recipientInfoGeneratorSupplier = Suppliers.memoize(() -> {
             try {
                 return new JceKeyTransRecipientInfoGenerator(publicKey).setProvider(JCE_PROVIDER);
@@ -93,7 +93,7 @@ public class StudyUploadEncryptorBC implements StudyUploadEncryptor {
         CertificateFactory factory = CertificateFactory.getInstance("X.509");
         X509Certificate cert = (X509Certificate) factory.generateCertificate(in);
 
-        StudyUploadEncryptorBC encryptor = new StudyUploadEncryptorBC(cert);
+        StudyUploadEncryptor encryptor = new StudyUploadEncryptor(cert);
         in.close();
 
         byte[] buffer = new byte[1024];
