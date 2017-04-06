@@ -79,7 +79,7 @@ public class StudyUploadEncryptor {
 
     /**
      * Util method to encrypt input file to given output file path using given public key
-     * @param publicKey
+     * @param certStr
      * @param inputFilePath
      * @param outputFilePath
      * @return
@@ -87,9 +87,9 @@ public class StudyUploadEncryptor {
      * @throws IOException
      * @throws CMSException
      */
-    public static void writeTo(String publicKey, String inputFilePath, String outputFilePath)
+    public static void writeTo(String certStr, String inputFilePath, String outputFilePath)
             throws CertificateException, IOException, CMSException {
-        InputStream in = new ByteArrayInputStream(publicKey.getBytes(StandardCharsets.UTF_8));
+        InputStream in = new ByteArrayInputStream(certStr.getBytes(StandardCharsets.UTF_8));
         CertificateFactory factory = CertificateFactory.getInstance("X.509");
         X509Certificate cert = (X509Certificate) factory.generateCertificate(in);
 

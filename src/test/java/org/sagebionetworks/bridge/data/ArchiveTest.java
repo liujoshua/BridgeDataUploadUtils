@@ -17,7 +17,6 @@ import java.util.zip.ZipInputStream;
 import com.google.common.io.ByteSource;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.joda.time.DateTime;
-import org.junit.Before;
 import org.testng.annotations.Test;
 import org.testng.collections.Maps;
 
@@ -31,10 +30,6 @@ public class ArchiveTest {
     private static final String TEST_PHONE_INFO = "test-phone-info";
 
     private static final byte[] BYTES = new byte[]{1, 2, 3, 4};
-
-    @Before
-    public void setup() {
-    }
 
     @Test
     public void testBuildActivity() throws IOException {
