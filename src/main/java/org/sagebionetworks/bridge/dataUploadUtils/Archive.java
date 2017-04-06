@@ -50,16 +50,16 @@ public class Archive {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof Archive)) return false;
         Archive archive = (Archive) o;
         return Objects.equal(dataFiles, archive.dataFiles)
                 && Objects.equal(archiveInfo, archive.archiveInfo);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hashCode(dataFiles, archiveInfo);
     }
 

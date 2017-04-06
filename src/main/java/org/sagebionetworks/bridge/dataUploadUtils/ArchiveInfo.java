@@ -12,7 +12,6 @@ import org.joda.time.DateTime;
 /**
  * This is the model for info.json
  */
-@SuppressWarnings("unused")
 class ArchiveInfo {
     private static final int DEFAULT_SCHEMA_REVISION = 1;
 
@@ -63,7 +62,7 @@ class ArchiveInfo {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ArchiveInfo that = (ArchiveInfo) o;
@@ -77,7 +76,7 @@ class ArchiveInfo {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hashCode(appVersion, phoneInfo, files, surveyGuid, surveyCreatedOn, item, schemaRevision);
     }
 
