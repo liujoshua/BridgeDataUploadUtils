@@ -216,7 +216,7 @@
                 <configuration>
                     <excludes>
                         <!-- config is inherently not testable -->
-                        <exclude>org/sagebionetworks/bridge/dataUploadUtils/*</exclude>
+                        <exclude>org/sagebionetworks/bridge/data/*</exclude>
                     </excludes>
                     <rules>
                         <rule>
