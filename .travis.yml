@@ -6,4 +6,4 @@ deploy:
   provider: script
   script: mvn deploy
   on:
-    branch: master
+    branch: develop
