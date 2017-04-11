@@ -6,7 +6,7 @@
 
     <groupId>org.sagebionetworks</groupId>
     <artifactId>BridgeDataUploadUtils</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
 
     <properties>
         <aws.version>1.10.49</aws.version>
