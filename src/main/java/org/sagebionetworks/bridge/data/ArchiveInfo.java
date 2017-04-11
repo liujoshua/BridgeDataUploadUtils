@@ -36,7 +36,7 @@ class ArchiveInfo {
     List<FileInfo> files;
 
     // used for surveys
-    @SerializedName("SurveyGuid")
+    @SerializedName("surveyGuid")
     String surveyGuid;
     @SerializedName("surveyCreatedOn")
     DateTime surveyCreatedOn;
