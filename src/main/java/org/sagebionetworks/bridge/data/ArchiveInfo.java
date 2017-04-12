@@ -25,6 +25,29 @@ class ArchiveInfo {
             this.filename = filename;
             this.timestamp = timestamp;
         }
+
+        @Override public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            FileInfo fileInfo = (FileInfo) o;
+            return Objects.equal(filename, fileInfo.filename) &&
+                    Objects.equal(timestamp, fileInfo.timestamp);
+        }
+
+        @Override public int hashCode() {
+            return Objects.hashCode(filename, timestamp);
+        }
+
+        @Override public String toString() {
+            return MoreObjects.toStringHelper(this)
+                    .add("filename", filename)
+                    .add("timestamp", timestamp)
+                    .toString();
+        }
     }
 
     @SerializedName("appVersion")
