@@ -79,13 +79,12 @@ public class StudyUploadEncryptor {
 
     /**
      * Util method to encrypt input file to given output file path using given public key
-     * @param certStr
-     * @param inputFilePath
-     * @param outputFilePath
-     * @return
-     * @throws CertificateException
-     * @throws IOException
-     * @throws CMSException
+     * @param certStr string representation of certificate
+     * @param inputFilePath input file path
+     * @param outputFilePath output file path
+     * @throws CertificateException problem with certificate
+     * @throws IOException problem with io
+     * @throws CMSException problem with encryption
      */
     public static void writeTo(String certStr, String inputFilePath, String outputFilePath)
             throws CertificateException, IOException, CMSException {
