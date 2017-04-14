@@ -44,22 +44,27 @@ public class StudyUploadEncryptor {
         Security.insertProviderAt(new BouncyCastleProvider(), 1);
     }
 
-    public StudyUploadEncryptor(X509Certificate publicKey) {
-        this.recipientInfoGeneratorSupplier = Suppliers.memoize(() -> {
-            try {
-                return new JceKeyTransRecipientInfoGenerator(publicKey).setProvider(JCE_PROVIDER);
-            } catch (CertificateEncodingException e) {
-                LOG.error("Unable to create recipient archiveInfo generator from public key", e);
+    public StudyUploadEncryptor(final X509Certificate publicKey) {
+        this.recipientInfoGeneratorSupplier = Suppliers.memoize(new Supplier<JceKeyTransRecipientInfoGenerator>() {
+            @Override public JceKeyTransRecipientInfoGenerator get() {
+                try {
+                    return new JceKeyTransRecipientInfoGenerator(publicKey).setProvider(JCE_PROVIDER);
+                } catch (CertificateEncodingException e) {
+                    LOG.error("Unable to create recipient archiveInfo generator from public key", e);
+                }
+                return null;
             }
-            return null;
         });
     }
 
     /**
-     * @param stream plaintext stream
+     * @param stream
+     *         plaintext stream
      * @return encrypted stream
-     * @throws CMSException problem with encryption
-     * @throws IOException  problem with stream
+     * @throws CMSException
+     *         problem with encryption
+     * @throws IOException
+     *         problem with stream
      */
     public OutputStream encrypt(OutputStream stream) throws CMSException, IOException {
         JceKeyTransRecipientInfoGenerator recipientInfoGenerator = recipientInfoGeneratorSupplier
@@ -79,12 +84,19 @@ public class StudyUploadEncryptor {
 
     /**
      * Util method to encrypt input file to given output file path using given public key
-     * @param certStr string representation of certificate
-     * @param inputFilePath input file path
-     * @param outputFilePath output file path
-     * @throws CertificateException problem with certificate
-     * @throws IOException problem with io
-     * @throws CMSException problem with encryption
+     *
+     * @param certStr
+     *         string representation of certificate
+     * @param inputFilePath
+     *         input file path
+     * @param outputFilePath
+     *         output file path
+     * @throws CertificateException
+     *         problem with certificate
+     * @throws IOException
+     *         problem with io
+     * @throws CMSException
+     *         problem with encryption
      */
     public static void writeTo(String certStr, String inputFilePath, String outputFilePath)
             throws CertificateException, IOException, CMSException {

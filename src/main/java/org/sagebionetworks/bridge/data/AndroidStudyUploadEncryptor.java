@@ -35,22 +35,28 @@ public class AndroidStudyUploadEncryptor {
         Security.insertProviderAt(new BouncyCastleProvider(), 1);
     }
 
-    public AndroidStudyUploadEncryptor(X509Certificate publicKey) {
-        this.recipientInfoGeneratorSupplier = Suppliers.memoize(() -> {
-            try {
-                return new JceKeyTransRecipientInfoGenerator(publicKey).setProvider(JCE_PROVIDER);
-            } catch (CertificateEncodingException e) {
-                LOG.error("Unable to create recipient archiveInfo generator from public key", e);
-            }
-            return null;
-        });
+    public AndroidStudyUploadEncryptor(final X509Certificate publicKey) {
+        this.recipientInfoGeneratorSupplier = Suppliers.memoize(
+                new Supplier<JceKeyTransRecipientInfoGenerator>() {
+                    @Override public JceKeyTransRecipientInfoGenerator get() {
+                        try {
+                            return new JceKeyTransRecipientInfoGenerator(publicKey).setProvider(JCE_PROVIDER);
+                        } catch (CertificateEncodingException e) {
+                            LOG.error("Unable to create recipient archiveInfo generator from public key", e);
+                        }
+                        return null;
+                    }
+                });
     }
 
     /**
-     * @param stream plaintext stream
+     * @param stream
+     *         plaintext stream
      * @return encrypted stream
-     * @throws CMSException problem with encryption
-     * @throws IOException  problem with stream
+     * @throws CMSException
+     *         problem with encryption
+     * @throws IOException
+     *         problem with stream
      */
     public OutputStream encrypt(OutputStream stream) throws CMSException, IOException {
         JceKeyTransRecipientInfoGenerator recipientInfoGenerator = recipientInfoGeneratorSupplier
