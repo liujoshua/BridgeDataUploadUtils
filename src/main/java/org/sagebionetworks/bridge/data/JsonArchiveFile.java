@@ -3,6 +3,7 @@ package org.sagebionetworks.bridge.data;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.io.ByteSource;
 import org.joda.time.DateTime;
@@ -56,5 +57,13 @@ public class JsonArchiveFile implements ArchiveFile {
     @Override
     public int hashCode() {
         return Objects.hashCode(filename, endDate, json);
+    }
+
+    @Override public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("filename", filename)
+                .add("endDate", endDate)
+                .add("json", json)
+                .toString();
     }
 }
