@@ -15,8 +15,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import org.joda.time.DateTime;
 
-import org.sagebionetworks.bridge.rest.RestUtils;
-
 public class Archive {
     private static final String ARCHIVE_INFO_FILE_NAME = "info.json";
 
@@ -41,7 +39,7 @@ public class Archive {
 
             ZipEntry infoFileEntry = new ZipEntry(ARCHIVE_INFO_FILE_NAME);
             zos.putNextEntry(infoFileEntry);
-            zos.write(RestUtils.GSON.toJson(archiveInfo).getBytes(StandardCharsets.UTF_8));
+            zos.write(JsonUtil.GSON.toJson(archiveInfo).getBytes(StandardCharsets.UTF_8));
             zos.closeEntry();
         } finally {
             zos.close();

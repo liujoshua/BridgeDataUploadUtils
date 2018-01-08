@@ -8,8 +8,6 @@ import com.google.common.base.Objects;
 import com.google.common.io.ByteSource;
 import org.joda.time.DateTime;
 
-import org.sagebionetworks.bridge.rest.RestUtils;
-
 public class JsonArchiveFile implements ArchiveFile {
     private final String filename;
     private final DateTime endDate;
@@ -22,11 +20,11 @@ public class JsonArchiveFile implements ArchiveFile {
     }
 
     public JsonArchiveFile(String filename, DateTime endDate, Object object) {
-        this(filename, endDate, RestUtils.GSON.toJson(object));
+        this(filename, endDate, JsonUtil.GSON.toJson(object));
     }
 
     public JsonArchiveFile(String filename, DateTime endDate, Object object, Type objectTYpe) {
-        this(filename, endDate, RestUtils.GSON.toJson(object, objectTYpe));
+        this(filename, endDate, JsonUtil.GSON.toJson(object, objectTYpe));
     }
 
     @Override
